@@ -107,7 +107,6 @@ namespace AWebServer
                 if (_dActions == null)
                 {
                     _dActions = new Dictionary<string, Func<string, string>>();
-                    _dActions.Add("chat", AWebApis.Apis.yell);
                     _dActions.Add("wikilogin", AWebApis.Apis.WikiLogin);
                     _dActions.Add("wikiregist", AWebApis.Apis.WikiRegist);
                     _dActions.Add("wikilist", AWebApis.Apis.WikiList);
