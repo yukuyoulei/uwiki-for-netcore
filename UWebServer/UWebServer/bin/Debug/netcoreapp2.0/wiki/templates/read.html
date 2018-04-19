@@ -1,0 +1,72 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>wiki - `'`wikititle`'`</title>
+<script>
+window.onload=function()
+{
+	var contentElem = document.getElementById("content");
+	var content = contentElem.value;
+	contentElem.value=unescape(content);
+}
+</script>
+
+<style type="text/css">
+textarea
+{
+	width:800px;
+	resize:none;
+}
+.textarea1
+{
+    height:600px;
+}
+.td{text-align:right;}
+</style>
+</script>
+
+</head>
+<body>
+	<center>
+		<table width="800">
+			<tr>
+				<td width="120">
+					<input type="button" onclick="onhome()" style="width:80px;height:30px;" value="返回列表">
+				</td>
+				<td class="td">
+					<font size=1><a href="/wiki/logout?u=`'`username`'`&s=`'`session`'`">登出</a></font>
+				</td>
+			</tr>
+		</table>
+		
+		<table  width="800">
+			<tr>
+				<td>
+					<textarea readonly="readonly">`'`wikititle`'`</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea wrap="soft" id="content" readonly="readonly" class="textarea1">`'`wikicontent`'`</textarea>
+				</td>
+			</tr>
+				<tr>
+				<td>
+					<center><input type="button"  onclick="onmodify()" disabled="disabled" value="修改" style="width:80px;height:30px;"></center>
+				</td>
+			</tr>
+
+		</table>
+	</center>
+<script>
+function onmodify()
+{
+	window.location.href="/wiki/modify?u=`'`username`'`&s=`'`session`'`&id=`'`wikiid`'`";
+}
+function onhome()
+{
+	window.location.href="/wiki/list?u=`'`username`'`&s=`'`session`'`";
+}
+</script>
+</body>

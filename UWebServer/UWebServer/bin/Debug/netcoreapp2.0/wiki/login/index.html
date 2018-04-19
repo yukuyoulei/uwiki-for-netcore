@@ -1,0 +1,80 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>login</title>
+<style type="text/css">
+.td{text-align:right;}
+</style>
+</head>
+<body>
+<center>
+<table width="800" cellspacing="0">
+	<tr>
+		<td width=300></td>
+		<td width=100 class="td">username:</td><td width=400><input type="text" id="username"></td>
+	</tr>
+	<tr>
+		<td width=300></td>
+		<td width=100 class="td">password:</td><td width=400><input type="password" id="password"></td>
+	</tr>
+</table>
+<table width="800" cellspacing="0">
+	<tr>
+		<td width=400></td>
+		<td width=100>
+			<center><input type="button" onclick="onlogin()" value="Login"></center>
+		</td>
+		<td width=100>
+			<center><input type="button" onclick="onregist()" value="Regist"></center>
+		</td>
+		<td width=300></td>
+	</tr>
+</table>
+<table width="800" cellspacing="0">
+	<tr><td>
+	<div id="loginresult">
+	</div>
+	</td></tr>
+</table>
+</center>
+<script>
+function onregist()
+{
+	window.location.href = "/wiki/regist/";
+}
+function onlogin()
+{
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+	var loginresult = document.getElementById("loginresult");
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			var responseText = xmlhttp.responseText;
+			if (responseText.indexOf("0,") == 0)
+			{
+				window.location.href="/wiki/list?u="+username+"&s="+responseText.slice(2);
+			}
+			else
+			{
+				loginresult.innerHTML = "登录失败，"+responseText;
+			}
+		}
+	}
+	var url="/wiki/login?u="+username+"&p="+password;
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send();
+}
+</script>
+</body>

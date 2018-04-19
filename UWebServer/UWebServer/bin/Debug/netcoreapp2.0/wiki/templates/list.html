@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+ table{line-height: 25px;border-collapse: collapse;}
+ .td{text-align:right;}
+</style>
+<title>wiki</title>
+<script>
+window.onload=function()
+{
+	var listElem = document.getElementById("list");
+	//var list = listElem.innerHTML;
+	//listElem.innerHTML=unescape(list);
+}
+</script>
+
+</head>
+<body>
+<center>
+<div id="list">
+	<table width="800">
+		<tr>
+			<td class="td">
+				<font size=1><a href="/wiki/logout?u=`'`username`'`&s=`'`session`'`">登出</a></font>
+			</td>
+		</tr>
+		<tr>
+			<td border:0px>wiki列表:<hr>
+			</td>
+		</tr>
+	</table>
+	<table width="800" cellspacing="0">
+		`'`wikilist`'`
+	</table>
+	<table width="800" cellspacing="0">
+		<tr>
+			<td>
+				<center><input type="button"  onclick="onnew()" value="新Wiki" style="width:80px;height:30px;"></center>
+			</td>
+		</tr>
+	</table>
+</div>
+</center>
+<script>
+function onnew()
+{
+	window.location.href="/wiki/new?u=`'`username`'`&s=`'`session`'`";
+}
+</script>
+</body>

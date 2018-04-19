@@ -1,0 +1,101 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>regist</title>
+</head>
+<style type="text/css">
+.td{text-align:right;}
+</style>
+<body>
+<div id="body">
+<center>
+<table width="800">
+	<tr>
+		<td width=400 class="td">username:</td><td width=400><input type="text" id="username"></td>
+	</tr>
+	<tr>
+		<td width=400 class="td">email:</td><td width=400><input type="text" id="email"></td>
+	</tr>
+	<tr>
+		<td width=400 class="td">password:</td><td width=400><input type="password" id="password"></td>
+	</tr>
+	<tr>
+		<td width=400 class="td">confirm:</td><td width=400><input type="password" id="confirm"></td>
+	</tr>
+</table>
+<table width="800">
+	<tr>
+		<td width=300></td>
+		<td width=100>
+			<center><input type="button" onclick="onregist()" value="Regist"></center>
+		</td>
+		<td width=100>
+			<center><input type="button" onclick="onreturn()" value="Return"></center>
+		</td>
+		<td width=200></td>
+	</tr>
+</table>
+</center>
+</div>
+<script>
+function onregist()
+{
+	var username = document.getElementById("username").value;
+	var email = escape(document.getElementById("email").value);
+	var password = escape(document.getElementById("password").value);
+	var confirm = escape(document.getElementById("confirm").value);
+	if (password!=confirm)
+	{
+		alert("两次密码不匹配！");
+		return;
+	}
+	if (username==""||password==""||confirm==""||email=="")
+	{
+		return;
+	}
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	var arr=new Array();
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			var responseText = xmlhttp.responseText;
+			if (responseText=="0")
+			{
+				alert("注册成功，请重新登录。");
+				arr=new Array();
+				arr.push("/wiki/login");
+				window.location.href=arr.join("");
+			}
+			else
+			{
+				var body = document.getElementById("body");
+				body.innerHTML = responseText;
+			}
+		}
+	}
+	arr=new Array();
+	arr.push("/wiki/regist?u=");
+	arr.push(username);
+	arr.push("&p=");
+	arr.push(password);
+	arr.push("&m=");
+	arr.push(email);
+	var url=arr.join("");
+	xmlhttp.open("POST",url,true);
+	xmlhttp.send();
+}
+function onreturn()
+{
+	window.location.href="/wiki/login/";
+}
+</script>
+</body>

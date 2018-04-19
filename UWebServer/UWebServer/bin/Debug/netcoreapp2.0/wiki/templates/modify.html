@@ -1,0 +1,119 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>wiki - `'`wikititle`'`</title>
+<script>
+window.onload=function()
+{
+	var contentElem = document.getElementById("content");
+	var content = contentElem.value;
+	contentElem.value=unescape(content);
+}
+</script>
+<style type="text/css">
+.textarea1
+{ 
+	width:800px;
+    height:600px;
+}
+textarea
+{
+	resize:none;
+}
+.titlerea
+{
+	width:800px;
+}
+.td{text-align:right;}
+</style>
+</head>
+<body>
+	<center>
+		<table width="800">
+			<tr>
+				<td width="120">
+					<input type="button" onclick="onhome()" style="width:80px;height:30px;" value="返回列表">
+				</td>
+				<td class="td">
+					<font size=1><a href="/wiki/logout?u=`'`username`'`&s=`'`session`'`">登出</a></font>
+				</td>
+			</tr>
+		</table>
+
+		<table  width="800">
+			<tr>
+				<td>
+					<center><textarea id="title" class="titlerea">`'`wikititle`'`</textarea></center>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea wrap="soft" id="content" class="textarea1">`'`wikicontent`'`</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" onclick="onmodify()" value="修改">
+					<input type="button" onclick="onreturn()" value="返回">
+				</td>
+			</tr>
+
+		</table>
+	</center>
+
+<script>
+function onreturn()
+{
+	window.location.href="/wiki/read?u=`'`username`'`&s=`'`session`'`&id=`'`wikiid`'`";
+}
+function onmodify()
+{
+	var title = document.getElementById("title").value;
+	var content = escape(document.getElementById("content").value);
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	var arr=new Array();
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			var responseText = xmlhttp.responseText;
+			if (responseText=="0")
+			{
+				alert("修改成功。");
+				arr=new Array();
+				arr.push("/wiki/read?u=`'`username`'`&s=`'`session`'`&id=`'`wikiid`'`");
+				window.location.href=arr.join("");
+			}
+			else
+			{
+				arr=new Array();
+				arr.push("登录失败，");
+				arr.push(responseText);
+				alert(arr.join(""));
+			}
+		}
+	}
+	arr=new Array();
+	arr.push("/wiki/write?u=`'`username`'`&s=`'`session`'`&id=`'`wikiid`'`&t=");
+	arr.push(escape(title));
+	arr.push("&c=");
+	arr.push(escape(content));
+	var url=arr.join("");
+	xmlhttp.open("POST",url,true);
+	xmlhttp.send();
+}
+function onhome()
+{
+	window.location.href="/wiki/list?u=`'`username`'`&s=`'`session`'`";
+}
+</script>
+</body>
