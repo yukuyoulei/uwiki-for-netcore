@@ -163,6 +163,27 @@ namespace AWebApis
 				, "wiki 注册验证信息", smailContent);
 			return LoadStaticPage(AWebServer.AWebServer.RootDir + "/wiki/templates/logout.html");
 		}
+
+		internal static string ReloadPages(string arg)
+		{
+			if (arg == "asdkljf")
+			{
+				AWebApis.Apis.ReloadStaticPages();
+				return "0";
+			}
+			return "-1";
+		}
+
+		internal static string QuitWeb(string arg)
+		{
+			if (arg == "asdkljf")
+			{
+				Environment.Exit(0);
+				return "0";
+			}
+			return "-1";
+		}
+
 		private static string validateurl = AWebServer.AWebServer.RootDir + "/wiki/templates/validate.html";
 		private const string validateTag = "`'`wikivalidate`'`";
 		public static string WikiValidate(string args)

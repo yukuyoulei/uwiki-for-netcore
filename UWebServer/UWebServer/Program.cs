@@ -117,7 +117,9 @@ namespace AWebServer
                     _dActions.Add("wikinew", AWebApis.Apis.WikiNew);
 					_dActions.Add("wikivalidate", AWebApis.Apis.WikiValidate);
 					_dActions.Add("sfz", AWebApis.Apis.DoValidShenFenZhengHao);
-                }
+					_dActions.Add("quit", AWebApis.Apis.QuitWeb);
+					_dActions.Add("reload", AWebApis.Apis.ReloadPages);
+				}
                 return _dActions;
             }
         }
