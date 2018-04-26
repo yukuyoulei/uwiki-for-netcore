@@ -75,9 +75,9 @@ public class AIniLoader
 		dIniNodes.Add(astr[0], astr[1]);
 	}
 
-	public int OnGetIntValue(string sNodeName)
+	public int OnGetIntValue(string sNodeName, int defaultValue = -1)
 	{
-		return typeParser.intParse(OnGetValue(sNodeName));
+		return typeParser.intParse(OnGetValue(sNodeName), defaultValue);
 	}
 	public void OnSetValue(string sNodeName, string sValue)
 	{

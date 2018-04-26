@@ -10,7 +10,7 @@ using System.Web;
 
 namespace AWebApis
 {
-	public class Apis
+	public partial class Apis
 	{
 		static Dictionary<string, string> dArgs = new Dictionary<string, string>();
 		static List<string> largs = new List<string>();
@@ -337,6 +337,7 @@ namespace AWebApis
 					AIniLoader title = new AIniLoader();
 					title.LoadIniFile(wikiTitlePath);
 					var stitle = title.OnGetValue("title");
+					var inum = title.OnGetIntValue("read", 0);
 					if (string.IsNullOrEmpty(stitle))
 					{
 						stitle = File.ReadAllText(wikiTitlePath);
@@ -354,7 +355,7 @@ namespace AWebApis
 						+ "&u=" + dArgs["u"]
 						+ "&s=" + dArgs["s"]
 						+ "\">"
-						+ HttpUtility.UrlDecode(stitle) + "</a></td>"
+						+ HttpUtility.UrlDecode(stitle) + "</a>" + " " + "<font size=\"1\" align=\"right\" color=\"#0000ff\">阅读：" + inum + "</font> " + "</td>"
 						+ "<td class=\"td\">"
 						+ fileExtention
 						+ "</td></tr>";
@@ -431,13 +432,16 @@ namespace AWebApis
 			AIniLoader title = new AIniLoader();
 			title.LoadIniFile(wikiTitlePath);
 			var stitle = title.OnGetValue("title");
+			var inum = title.OnGetIntValue("read", 0);
+			inum++;
+			title.OnSetValue("read", inum.ToString());
 			if (string.IsNullOrEmpty(stitle))
 			{
 				stitle = File.ReadAllText(wikiTitlePath);
 				title.OnSetValue("title", stitle);
 				title.OnSetValue("author", dArgs["u"]);
-				title.OnSaveBack();
 			}
+			title.OnSaveBack();
 
 			string sresult = LoadStaticPage(AWebServer.AWebServer.RootDir + "/wiki/templates/read.html");
 			sresult = sresult.Replace(WikiReplaceTag + "wikititle" + WikiReplaceTag, HttpUtility.UrlDecode(stitle));
@@ -594,6 +598,6 @@ namespace AWebApis
 			}
 			return "0";
 		}
-		
+
 	}
 }
