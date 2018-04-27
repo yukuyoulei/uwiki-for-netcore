@@ -61,7 +61,7 @@ namespace AWebServer
                     {
                         break;
                     }
-                    else if(s == "r")
+                    else if (s == "r")
                     {
                         AWebApis.Apis.ReloadStaticPages();
                     }
@@ -70,10 +70,10 @@ namespace AWebServer
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message + "\r\n will retry after 2 seconds, ctrl+c to break.");
-				//Environment.Exit(0);
+                //Environment.Exit(0);
 
-				Thread.Sleep(2000);
-				new AWebServer(port, rootDir);
+                Thread.Sleep(2000);
+                new AWebServer(port, rootDir);
             }
         }
 
@@ -89,6 +89,7 @@ namespace AWebServer
                 byte[] recv_buffer = new byte[1024 * 640];
                 int real_recv = new_client.Receive(recv_buffer);
                 string recv_request = Encoding.UTF8.GetString(recv_buffer, 0, real_recv);
+                Console.WriteLine("[" + DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + "]");
                 Console.WriteLine(recv_request);
 
                 Resolve(recv_request, new_client);
@@ -115,11 +116,11 @@ namespace AWebServer
                     _dActions.Add("wikimodify", AWebApis.Apis.WikiModify);
                     _dActions.Add("wikilogout", AWebApis.Apis.WikiLogout);
                     _dActions.Add("wikinew", AWebApis.Apis.WikiNew);
-					_dActions.Add("wikivalidate", AWebApis.Apis.WikiValidate);
-					_dActions.Add("sfz", AWebApis.Apis.DoValidShenFenZhengHao);
-					_dActions.Add("quit", AWebApis.Apis.QuitWeb);
-					_dActions.Add("reload", AWebApis.Apis.ReloadPages);
-				}
+                    _dActions.Add("wikivalidate", AWebApis.Apis.WikiValidate);
+                    _dActions.Add("sfz", AWebApis.Apis.DoValidShenFenZhengHao);
+                    _dActions.Add("quit", AWebApis.Apis.QuitWeb);
+                    _dActions.Add("reload", AWebApis.Apis.ReloadPages);
+                }
                 return _dActions;
             }
         }
@@ -159,7 +160,7 @@ namespace AWebServer
                         }
                         else
                         {
-							SendResult(AWebApis.Apis.Wiki404(), client);
+                            SendResult(AWebApis.Apis.Wiki404(), client);
                             //SendResult("Hello " + spath, client);
                         }
                     }
@@ -221,9 +222,9 @@ namespace AWebServer
         }
     }
 
-	/// <summary>
-	/// cannot be used in .net core, but works fine in .net framework
-	/// </summary>
+    /// <summary>
+    /// cannot be used in .net core, but works fine in .net framework
+    /// </summary>
     class RemoteDomain : MarshalByRefObject
     {
         public string Remote(string[] assembleArgs)
