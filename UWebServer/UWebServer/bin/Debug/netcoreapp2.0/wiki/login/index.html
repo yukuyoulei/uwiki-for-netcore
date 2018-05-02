@@ -61,7 +61,7 @@ padding:5px;
 </table>
 </center>
 
-<div id="popupcontent" style="position:relative;margin-left:10%;margin-right:10%;margin-top:-150px;height:150;"><center>这是一个DIV弹窗效果!</center></div> 
+<div id="popupcontent" style="position:relative;margin-left:10%;margin-right:10%;margin-top:-150px;height:150;"><center><input type="button" onclick="onclose()" value="关闭"></center></div> 
 
 <script>
 function onregist()
@@ -71,10 +71,14 @@ function onregist()
 function showwindow(content)
 {
 	var popUp = document.getElementById("popupcontent"); 
-	popUp.innerHTML = "<center>"+content+"<br><br><input type=\"button\" onclick=\"onclose()\" value=\"关闭\">"+"</center>"+"<script>function onclose(){var popUp = document.getElementById(\"popupcontent\"); popUp.style.visibility = \"hidden\";}</script>";
+	popUp.innerHTML = "<center>"+content+popUp.innerHTML;
 	popUp.style.visibility = "visible";
 }
-
+function onclose()
+{
+	var popUp = document.getElementById("popupcontent"); 
+	popUp.style.visibility = "hidden";
+}
 function onlogin()
 {
 	var username = document.getElementById("username").value;
