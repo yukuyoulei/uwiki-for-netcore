@@ -16,7 +16,17 @@
 	a:visited {color: #00FF00} /* 已访问的链接 */
 	a:hover {color: #FF00FF} /* 鼠标移动到链接上 */
 	a:active {color: #0000FF} /* 选定的链接 */	 
- </style>   
+ 
+#popupcontent{ 
+position: absolute; 
+visibility: hidden; 
+overflow: hidden; 
+border:1px solid #CCC; 
+background-color:#F9F9F9; 
+border:1px solid #333; 
+padding:5px; 
+} 
+</style>   
 
 </head>
 <body>
@@ -50,11 +60,21 @@
 	</td></tr>
 </table>
 </center>
+
+<div id="popupcontent">这是一个DIV弹窗效果!</div> 
+
 <script>
 function onregist()
 {
 	window.location.href = "/wiki/regist/";
 }
+function showwindow(content)
+{
+	var popUp = document.getElementById("popupcontent"); 
+	popUp.innerHTML = content;
+	popUp.style.visibility = "show";
+}
+
 function onlogin()
 {
 	var username = document.getElementById("username").value;
@@ -80,7 +100,7 @@ function onlogin()
 			}
 			else
 			{
-				loginresult.innerHTML = "登录失败，"+responseText;
+				showwindow("登录失败，"+responseText);
 			}
 		}
 	}
