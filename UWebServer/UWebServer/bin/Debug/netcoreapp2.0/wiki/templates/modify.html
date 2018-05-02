@@ -26,6 +26,17 @@ textarea
 	width:800px;
 }
 .td{text-align:right;}
+
+#popupcontent{ 
+position: absolute; 
+visibility: hidden; 
+overflow: hidden; 
+border:1px solid #CCC; 
+background-color:#F9F9F9; 
+border:1px solid #333; 
+padding:5px; 
+} 
+ 
 </style>
 </head>
 <body>
@@ -61,11 +72,17 @@ textarea
 
 		</table>
 	</center>
-
+<div id="popupcontent">这是一个DIV弹窗效果!</div> 
 <script>
 function onreturn()
 {
 	window.location.href="/wiki/read?u=`'`username`'`&s=`'`session`'`&id=`'`wikiid`'`";
+}
+function showwindow(content)
+{
+	var popUp = document.getElementById("popupcontent"); 
+	popUp.innerHTML = content;
+	popUp.style.visibility = "show";
 }
 function onmodify()
 {
@@ -88,7 +105,7 @@ function onmodify()
 			var responseText = xmlhttp.responseText;
 			if (responseText=="0")
 			{
-				alert("修改成功。");
+				showwindow("修改成功。");
 				arr=new Array();
 				arr.push("/wiki/read?u=`'`username`'`&s=`'`session`'`&id=`'`wikiid`'`");
 				window.location.href=arr.join("");
@@ -98,7 +115,7 @@ function onmodify()
 				arr=new Array();
 				arr.push("登录失败，");
 				arr.push(responseText);
-				alert(arr.join(""));
+				showwindow(arr.join(""));
 			}
 		}
 	}
