@@ -19,8 +19,8 @@
  
 #popupcontent{ 
 position: absolute; 
-visibility: hidden; 
-overflow: hidden; 
+visibility: visible; 
+overflow: visible; 
 border:1px solid #CCC; 
 background-color:#F9F9F9; 
 border:1px solid #333; 
@@ -61,7 +61,7 @@ padding:5px;
 </table>
 </center>
 
-<div id="popupcontent" style="position:absolute;margin-left:15%;margin-right:15%;margin-top:20px;height:400px;">这是一个DIV弹窗效果!</div> 
+<div id="popupcontent" style="position:relative;margin-left:10%;margin-right:10%;margin-top:-150px;height:150;"><center>这是一个DIV弹窗效果!</cneter></div> 
 
 <script>
 function onregist()
@@ -71,7 +71,7 @@ function onregist()
 function showwindow(content)
 {
 	var popUp = document.getElementById("popupcontent"); 
-	popUp.innerHTML = content;
+	popUp.innerHTML = "<center>"+content+"</cneter>";
 	popUp.style.visibility = "visible";
 }
 
