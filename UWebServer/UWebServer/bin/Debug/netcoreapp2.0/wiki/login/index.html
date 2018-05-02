@@ -61,7 +61,7 @@ padding:5px;
 </table>
 </center>
 
-<div id="popupcontent" style="position:relative;margin-left:10%;margin-right:10%;margin-top:-150px;height:150;"><center><input type="button" onclick="onclose()" value="关闭"></center></div> 
+<div id="popupcontent" style="position:relative;margin-left:10%;margin-right:10%;margin-top:-150px;height:150;"><center><input type="button" onclick="onclosediv()" value="关闭"></center></div> 
 
 <script>
 function onregist()
@@ -71,10 +71,10 @@ function onregist()
 function showwindow(content)
 {
 	var popUp = document.getElementById("popupcontent"); 
-	popUp.innerHTML = "<center>"+content+popUp.innerHTML;
+	popUp.innerHTML = "<center>"+content+popUp.innerHTML+"<br><br>";
 	popUp.style.visibility = "visible";
 }
-function onclose()
+function onclosediv()
 {
 	var popUp = document.getElementById("popupcontent"); 
 	popUp.style.visibility = "hidden";
