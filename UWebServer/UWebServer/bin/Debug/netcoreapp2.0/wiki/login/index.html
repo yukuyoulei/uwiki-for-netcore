@@ -71,10 +71,14 @@ function onregist()
 function showwindow(content)
 {
 	var popUp = document.getElementById("popupcontent"); 
-	popUp.innerHTML = "<center>"+content+"</cneter>";
+	popUp.innerHTML = "<center>"+content+"<br><input type=\"button\" onclick=\"onclose()\" value=\"关闭\">"+"</cneter>";
 	popUp.style.visibility = "visible";
 }
-
+function onclose()
+{
+	var popUp = document.getElementById("popupcontent"); 
+	popUp.style.visibility = "hidden";
+}
 function onlogin()
 {
 	var username = document.getElementById("username").value;
