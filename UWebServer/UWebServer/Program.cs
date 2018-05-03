@@ -90,6 +90,7 @@ namespace AWebServer
                 int real_recv = new_client.Receive(recv_buffer);
                 string recv_request = Encoding.UTF8.GetString(recv_buffer, 0, real_recv);
                 Console.WriteLine("[" + DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + "]");
+                Console.WriteLine("client:" + new_client.RemoteEndPoint);
                 Console.WriteLine(recv_request);
 
                 Resolve(recv_request, new_client);
