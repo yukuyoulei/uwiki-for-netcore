@@ -350,16 +350,27 @@ namespace AWebApis
 						fileExtention = "<font size=\"1\" align=\"right\" color=\"#0000ff\">" + title.OnGetValue("author") + "</font> " + "<font size=\"1\" align=\"right\">" + fileExtention + "</font>";
 					}
 
-					swikis += "<tr><td><a href=\"../wiki/read?" +
-						"id=" + wikiName
-						+ "&u=" + dArgs["u"]
-						+ "&s=" + dArgs["s"]
-						+ "\">"
-						+ HttpUtility.UrlDecode(stitle) + "</a>" + " " + "<font size=\"1\" align=\"right\" color=\"#0000ff\">阅读：" + inum + "</font> " + "</td>"
-						+ "<td class=\"td\">"
-						+ fileExtention
-						+ "</td></tr>";
-					swikis += "<br>";
+					if (dArgs.ContainsKey("oc"))
+					{
+						swikis += HttpUtility.UrlEncode(stitle) + "\r\n";
+					}
+					else
+					{
+						swikis += "<tr><td><a href=\"../wiki/read?" +
+						  "id=" + wikiName
+						  + "&u=" + dArgs["u"]
+						  + "&s=" + dArgs["s"]
+						  + "\">"
+						  + HttpUtility.UrlDecode(stitle) + "</a>" + " " + "<font size=\"1\" align=\"right\" color=\"#0000ff\">阅读：" + inum + "</font> " + "</td>"
+						  + "<td class=\"td\">"
+						  + fileExtention
+						  + "</td></tr>";
+						swikis += "<br>";
+					}
+				}
+				if (dArgs.ContainsKey("oc"))
+				{
+					return swikis;
 				}
 				sresult = sresult.Replace(WikiReplaceTag + "wikilist" + WikiReplaceTag, swikis);
 			}
@@ -429,6 +440,10 @@ namespace AWebApis
 			}
 			string wikiTitlePath = AWebServer.AWebServer.RootDir + "/wiki/db/" + dArgs["id"] + ".title";
 			var contents = File.ReadAllText(spath);
+			if (dArgs.ContainsKey("oc"))
+			{
+				return HttpUtility.HtmlEncode(contents);
+			}
 			AIniLoader title = new AIniLoader();
 			title.LoadIniFile(wikiTitlePath);
 			var stitle = title.OnGetValue("title");
