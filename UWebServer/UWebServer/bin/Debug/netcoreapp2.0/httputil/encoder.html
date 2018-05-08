@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>index</title>
+<style type="text/css">      
+ body{      
+	background-image: url(/bg.jpg);      
+	background-size:cover;    
+ }  
+a:link {color: #FF0000} /* 未访问的链接 */
+a:visited {color: #00FF00} /* 已访问的链接 */
+a:hover {color: #FF00FF} /* 鼠标移动到链接上 */
+a:active {color: #0000FF} /* 选定的链接 */	 
+.textarea1
+{ 
+	width:800px;
+    height:300px;
+}
+textarea
+{
+	resize:none;
+}
+ </style>   
+
+</head>
+<body>
+<center>
+	<table width="800" cellspacing="0">
+		<tr>
+			<td>
+				encoded content:
+				<textarea wrap="soft" id="encodecontent" class="textarea1"></textarea>
+				<p>
+				<center><input type="button" onclick="ondecode()" value="decode"></input></center>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				decoded content:
+				<textarea wrap="soft" id="decodecontent" class="textarea1"></textarea>
+				<p>
+				<center><input type="button" onclick="onencode()" value="encode"></input></center>
+			</td>
+		</tr>
+	</table>
+<script>
+function ondecode()
+{
+	var encodec = document.getElementById("encodecontent").value;
+	document.getElementById("decodecontent").value = unescape(encodec);
+}
+function onencode()
+{
+	var encodec = document.getElementById("decodecontent").value;
+	document.getElementById("encodecontent").value = escape(encodec);
+}
+</script>
+</body>
